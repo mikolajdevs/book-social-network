@@ -1,12 +1,8 @@
 package com.example.book.book;
 
-import com.example.book.history.BookTransactionHistory;
-import org.springframework.stereotype.Service;
-
-@Service
 public class BookMapper {
 
-    public Book toBook(BookRequest request) {
+    public static Book toBook(BookRequest request) {
         return Book.builder()
                 .id(request.id())
                 .title(request.title())
@@ -18,7 +14,7 @@ public class BookMapper {
                 .build();
     }
 
-    public BookResponse toBookResponse(Book book) {
+    public static BookResponse toBookResponse(Book book) {
         return BookResponse.builder()
                 .id(book.getId())
                 .title(book.getTitle())
@@ -31,18 +27,6 @@ public class BookMapper {
                 .owner(book.getOwner().fullName())
                 // TODO: implement file upload
 //                .cover()
-                .build();
-    }
-
-    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistory) {
-        return BorrowedBookResponse.builder()
-                .id(bookTransactionHistory.getBook().getId())
-                .title(bookTransactionHistory.getBook().getTitle())
-                .authorName(bookTransactionHistory.getBook().getAuthorName())
-                .isbn(bookTransactionHistory.getBook().getIsbn())
-                .rate(bookTransactionHistory.getBook().getRate())
-                .returned(bookTransactionHistory.isReturned())
-                .returnApproved(bookTransactionHistory.isReturnApproved())
                 .build();
     }
 }

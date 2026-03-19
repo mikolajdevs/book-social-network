@@ -2,7 +2,7 @@ package com.example.book.book;
 
 import com.example.book.common.BaseEntity;
 import com.example.book.feedback.Feedback;
-import com.example.book.history.BookTransactionHistory;
+import com.example.book.transaction.BookTransaction;
 import com.example.book.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class Book extends BaseEntity {
     private List<Feedback> feedbacks;
 
     @OneToMany(mappedBy = "book")
-    private List<BookTransactionHistory> histories;
+    private List<BookTransaction> histories;
 
     @Transient
     public double getRate() {

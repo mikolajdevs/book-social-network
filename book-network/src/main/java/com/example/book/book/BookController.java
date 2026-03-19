@@ -47,24 +47,6 @@ public class BookController {
         return ResponseEntity.ok(service.findAllBooksByOwner(page, size, connectedUser));
     }
 
-    @GetMapping("/borrowed")
-    public ResponseEntity<PageResponse<BorrowedBookResponse>> findAllBorrowedBooks(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "page", defaultValue = "10", required = false) int size,
-            Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(service.findAllBorrowedBooks(page, size, connectedUser));
-    }
-
-    @GetMapping("/returned")
-    public ResponseEntity<PageResponse<BorrowedBookResponse>> findAllReturnedBooks(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "page", defaultValue = "10", required = false) int size,
-            Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(service.findAllReturnedBooks(page, size, connectedUser));
-    }
-
     @PatchMapping("/{bookId}/shareable")
     public ResponseEntity<Long> updateShareableStatus(
             @PathVariable Long bookId,
@@ -79,29 +61,5 @@ public class BookController {
             Authentication connectedUser
     ) {
         return ResponseEntity.ok(service.updateArchivedStatus(bookId, connectedUser));
-    }
-
-    @PostMapping("/borrow/{bookId}")
-    public ResponseEntity<Long> borrowBook(
-            @PathVariable Long bookId,
-            Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(service.borrowBook(bookId, connectedUser));
-    }
-
-    @PatchMapping("/borrow/return/{bookId}")
-    public ResponseEntity<Long> returnBorrowedBook(
-            @PathVariable Long bookId,
-            Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(service.returnBorrowedBook(bookId, connectedUser));
-    }
-
-    @PatchMapping("/borrow/return/approve/{bookId}")
-    public ResponseEntity<Long> approveReturnBorrowedBook(
-            @PathVariable Long bookId,
-            Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(service.approveReturnBorrowedBook(bookId, connectedUser));
     }
 }
