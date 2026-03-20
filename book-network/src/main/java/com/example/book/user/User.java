@@ -1,5 +1,7 @@
 package com.example.book.user;
 
+import com.example.book.book.Book;
+import com.example.book.transaction.BookTransaction;
 import com.example.book.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,7 +31,7 @@ public class User implements UserDetails, Principal {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String firstname;
     private String lastname;
     private LocalDate dateOfBirth;
@@ -41,6 +43,12 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransaction> histories;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
